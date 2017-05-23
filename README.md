@@ -1,1 +1,1 @@
-# angular2skeleton-app
+# Angular2 Weather Widget
