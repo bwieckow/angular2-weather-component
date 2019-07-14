@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-var observable_1 = require('rxjs/observable');
+var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/catch');
 var constants_1 = require('../constants/constants');
@@ -21,17 +21,17 @@ var WeatherService = (function () {
     }
     WeatherService.prototype.getCurrentLocation = function () {
         if (navigator.geolocation) {
-            return observable_1.Observable.create(function (observer) {
+            return Observable_1.Observable.create(function (observer) {
                 navigator.geolocation.getCurrentPosition(function (pos) {
                     observer.next(pos); // next piece of data I wanna make observable whatever we put in brackets
                 }),
                     function (err) {
-                        return observable_1.Observable.throw(err);
+                        return Observable_1.Observable.throw(err);
                     };
             });
         }
         else {
-            return observable_1.Observable.throw("Geolocation is not available.");
+            return Observable_1.Observable.throw("Geolocation is not available.");
         }
     };
     // Observables are useful when we want to stream data (many queries) -- (enables to)provides data, subscriber watch/observe if there is new data
@@ -43,7 +43,7 @@ var WeatherService = (function () {
             .map(function (data) { return data.json(); }) // map() takes the response data from the call and then transform in some way and provide it via Observable -- this how we get the response type of Observable
             .catch(function (err) {
             console.error("Unable to get weather data - ", err);
-            return observable_1.Observable.throw(err.json());
+            return Observable_1.Observable.throw(err.json());
         });
     };
     WeatherService.prototype.getLocationName = function (lat, long) {
@@ -53,7 +53,7 @@ var WeatherService = (function () {
             .map(function (loc) { return loc.json(); })
             .catch(function (err) {
             console.error("Unable to get location", err);
-            return observable_1.Observable.throw(err);
+            return Observable_1.Observable.throw(err);
         });
     };
     WeatherService = __decorate([
